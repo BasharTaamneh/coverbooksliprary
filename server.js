@@ -11,6 +11,7 @@ const axios = require('axios')
 
 let inMemory = {}
 server.get('/coverBook', gitcoverbook);
+//http://localhost:3003/coverBook?q={bookname}
 
 
 function gitcoverbook(req, res) {
@@ -48,30 +49,36 @@ function gitcoverbook(req, res) {
 
 class coverBookData {
     constructor(item) {
+     
 
-        if (item.author_name == undefined) {
-            this.author_name = 'there is no author'
-        }
-        else {
-            this.author_name = item.author_name[0];
 
-        }
-
-        if (item.isbn == undefined) {
-
-            this.Book_src = `https://i.imgur.com/J5LVHEL.jpeg`;
-
-        }
-        else {
-            for (let i = 0; i < item.isbn.length; i++) {
-                if (item.isbn[i] == undefined) {
-
-                    this.Book_src = `https://covers.openlibrary.org/b/isbn/${item.isbn[i + 1]}-M.jpg`;
+                if (item.author_name == undefined) {
+                    this.author_name = 'there is no author'
+                }
+                else {
+                    this.author_name = item.author_name[0];
 
                 }
-                else { this.Book_src = `https://covers.openlibrary.org/b/isbn/${item.isbn[i]}-M.jpg`; }
-            }
-        }
+
+                if (item.isbn == undefined) {
+
+                    this.Book_src = `https://i.imgur.com/J5LVHEL.jpeg`;
+
+                }
+                else {
+                    for (let i = 0; i < item.isbn.length; i++) {
+                        if (item.isbn[i] == undefined) {
+
+                            this.Book_src = `https://covers.openlibrary.org/b/isbn/${item.isbn[i + 1]}-M.jpg`;
+
+                        }
+                        else { this.Book_src = `https://covers.openlibrary.org/b/isbn/${item.isbn[i]}-M.jpg`; }
+                    }
+                }
+            
+           
+
+        
     }
 
 }
